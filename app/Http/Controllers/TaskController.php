@@ -4,15 +4,23 @@ namespace App\Http\Controllers;
 
 use App\Models\Task;
 use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Foundation\Validation\ValidatesRequests;
 
 class TaskController extends Controller
 {
+    use AuthorizesRequests, ValidatesRequests;
+
     /**
      * Create a new controller instance.
      */
     public function __construct()
     {
-        $this->middleware('auth:sanctum');
+        // Remove this line that's causing the error
+        // $this->middleware('auth:sanctum');
+        
+        // We don't need this here since we're already applying
+        // the auth:sanctum middleware in the routes file
     }
 
     /**
