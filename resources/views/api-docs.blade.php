@@ -5,146 +5,301 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>API Documentation</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/default.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: system-ui, -apple-system, sans-serif;
             line-height: 1.6;
             color: #333;
-            padding-top: 60px;
+            background: #f8f9fa;
         }
-        .navbar {
-            background-color: #2c3e50;
-        }
+
+        /* Modern Sidebar Styles */
         .sidebar {
             position: fixed;
-            top: 60px;
-            bottom: 0;
+            top: 0;
             left: 0;
-            padding: 20px;
-            background-color: #f8f9fa;
+            bottom: 0;
+            width: 280px;
+            background: white;
+            border-right: 1px solid #e5e7eb;
             overflow-y: auto;
+            padding: 0;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.02);
         }
+
+        .sidebar-header {
+            padding: 20px;
+            background: #f8fafc;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .search-box {
+            position: relative;
+            margin-bottom: 10px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 8px 15px;
+            padding-left: 35px;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            font-size: 14px;
+            background: white;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94a3b8;
+        }
+
+        .nav-section {
+            padding: 15px 0;
+        }
+
+        .nav-section-title {
+            padding: 8px 20px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .nav-item {
+            padding: 8px 20px;
+            display: flex;
+            align-items: center;
+            color: #475569;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .nav-item:hover {
+            background: #f8fafc;
+            color: #2563eb;
+        }
+
+        .nav-item.active {
+            background: #eff6ff;
+            color: #2563eb;
+            font-weight: 500;
+        }
+
+        .method-label {
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+            margin-right: 8px;
+            color: white;
+            text-transform: uppercase;
+        }
+
+        .method-get { background: #22c55e; }
+        .method-post { background: #3b82f6; }
+        .method-put { background: #f59e0b; }
+        .method-delete { background: #ef4444; }
+
+        .nav-sub-item {
+            padding: 8px 20px 8px 40px;
+            color: #64748b;
+            text-decoration: none;
+            font-size: 14px;
+            display: block;
+            transition: all 0.2s;
+        }
+
+        .nav-sub-item:hover {
+            background: #f8fafc;
+            color: #2563eb;
+        }
+
+        /* Keep existing styles for main content */
         .main-content {
-            margin-left: 250px;
-            padding: 20px;
+            margin-left: 280px;
+            padding: 40px;
         }
+
+        /* Keep existing endpoint styles */
         .endpoint {
-            margin-bottom: 30px;
+            background: white;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
             padding: 20px;
-            border-radius: 5px;
-            background-color: #fff;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
         }
+
         .method {
             display: inline-block;
             padding: 5px 10px;
-            border-radius: 3px;
+            border-radius: 4px;
             color: white;
             font-weight: bold;
+            font-size: 14px;
+            margin-right: 10px;
         }
-        .get { background-color: #61affe; }
-        .post { background-color: #49cc90; }
-        .put { background-color: #fca130; }
-        .delete { background-color: #f93e3e; }
+
+        .get { background-color: #28a745; }
+        .post { background-color: #007bff; }
+        .put { background-color: #ffc107; }
+        .delete { background-color: #dc3545; }
+
         .endpoint-url {
-            display: inline-block;
-            margin-left: 10px;
             font-family: monospace;
+            font-size: 14px;
+            color: #666;
         }
+
         pre {
-            background-color: #f8f9fa;
+            background: #f8f9fa;
             padding: 15px;
-            border-radius: 5px;
+            border-radius: 4px;
             overflow-x: auto;
         }
+
         .nav-link {
-            color: #2c3e50;
+            color: #333;
+            padding: 8px 15px;
+            border-radius: 4px;
         }
+
         .nav-link:hover {
-            color: #1a252f;
+            background: #f8f9fa;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .parameter-table {
+            width: 100%;
+            margin: 20px 0;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+        }
+
+        .parameter-table th,
+        .parameter-table td {
+            padding: 12px;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .parameter-table th {
+            background: #f8f9fa;
+            font-weight: 600;
         }
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">API Documentation</a>
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h5 class="mb-3">API Documentation</h5>
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search endpoints..." />
+            </div>
         </div>
-    </nav>
 
-    <div class="container-fluid">
-        <div class="row">
-            <nav class="col-md-2 sidebar">
-                <div class="position-sticky">
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#authentication">Authentication</a>
-                            <ul class="nav flex-column ms-3">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#register">Register</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#login">Login</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#logout">Logout</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#user-profile">User Profile</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#tasks">Tasks</a>
-                            <ul class="nav flex-column ms-3">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#list-tasks">List Tasks</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#create-task">Create Task</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#get-task">Get Task</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#update-task">Update Task</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#delete-task">Delete Task</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#errors">Error Handling</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
+        <div class="nav-section">
+            <div class="nav-section-title">Authentication</div>
+            <a href="#register" class="nav-item">
+                <span class="method-label method-post">post</span>
+                Register
+            </a>
+            <a href="#login" class="nav-item">
+                <span class="method-label method-post">post</span>
+                Login
+            </a>
+            <a href="#logout" class="nav-item">
+                <span class="method-label method-post">post</span>
+                Logout
+            </a>
+        </div>
 
-            <main class="col-md-10 main-content">
-                <h1>API Documentation</h1>
-                <p>Base URL: <code>http://your-domain.com/api</code></p>
+        <div class="nav-section">
+            <div class="nav-section-title">Tasks</div>
+            <a href="#list-tasks" class="nav-item">
+                <span class="method-label method-get">get</span>
+                List Tasks
+            </a>
+            <a href="#create-task" class="nav-item">
+                <span class="method-label method-post">post</span>
+                Create Task
+            </a>
+            <a href="#get-task" class="nav-item">
+                <span class="method-label method-get">get</span>
+                Get Task
+            </a>
+            <a href="#update-task" class="nav-item">
+                <span class="method-label method-put">put</span>
+                Update Task
+            </a>
+            <a href="#delete-task" class="nav-item">
+                <span class="method-label method-delete">del</span>
+                Delete Task
+            </a>
+        </div>
+    </div>
 
-                <section id="authentication">
-                    <h2>Authentication</h2>
+    <div class="main-content">
+        <h2 id="authentication">Authentication</h2>
 
-                    <div id="register" class="endpoint">
-                        <span class="method post">POST</span>
-                        <span class="endpoint-url">/register</span>
-                        <h4>Register User</h4>
-                        <h5>Request Headers</h5>
-                        <pre><code>Content-Type: application/json
-Accept: application/json</code></pre>
-                        <h5>Request Body</h5>
-                        <pre><code>{
-    "name": "John Doe",
-    "email": "john@example.com",
-    "password": "password123",
-    "password_confirmation": "password123"
-}</code></pre>
-                        <h5>Response (201 Created)</h5>
-                        <pre><code>{
+        <div id="register" class="endpoint">
+            <span class="method post">POST</span>
+            <span class="endpoint-url">/api/register</span>
+
+            <h4 class="mt-3">Register a new user</h4>
+            <p>Create a new user account and receive an authentication token.</p>
+
+            <h5>Request Body</h5>
+            <table class="parameter-table">
+                <thead>
+                    <tr>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                        <th>Required</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>name</td>
+                        <td>string</td>
+                        <td>User's full name</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td>email</td>
+                        <td>string</td>
+                        <td>User's email address</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td>password</td>
+                        <td>string</td>
+                        <td>User's password (min. 8 characters)</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td>password_confirmation</td>
+                        <td>string</td>
+                        <td>Password confirmation</td>
+                        <td>Yes</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h5>Response (201 Created)</h5>
+            <pre><code>{
     "user": {
         "id": 1,
         "name": "John Doe",
@@ -155,23 +310,23 @@ Accept: application/json</code></pre>
     "token": "1|abcdef123456...",
     "message": "Registration successful"
 }</code></pre>
-                    </div>
+        </div>
 
-                    <!-- Add similar blocks for login, logout, and user profile -->
-                </section>
+        <h2 id="tasks">Tasks</h2>
 
-                <section id="tasks">
-                    <h2>Tasks</h2>
+        <div id="list-tasks" class="endpoint">
+            <span class="method get">GET</span>
+            <span class="endpoint-url">/api/tasks</span>
 
-                    <div id="list-tasks" class="endpoint">
-                        <span class="method get">GET</span>
-                        <span class="endpoint-url">/tasks</span>
-                        <h4>List All Tasks</h4>
-                        <h5>Request Headers</h5>
-                        <pre><code>Authorization: Bearer {token}
+            <h4 class="mt-3">List all tasks</h4>
+            <p>Retrieve all tasks for the authenticated user.</p>
+
+            <h5>Headers</h5>
+            <pre><code>Authorization: Bearer {your_token}
 Accept: application/json</code></pre>
-                        <h5>Response (200 OK)</h5>
-                        <pre><code>[
+
+            <h5>Response (200 OK)</h5>
+            <pre><code>[
     {
         "id": 1,
         "user_id": 1,
@@ -183,48 +338,12 @@ Accept: application/json</code></pre>
         "updated_at": "2024-01-01T12:00:00.000000Z"
     }
 ]</code></pre>
-                    </div>
-
-                    <!-- Add similar blocks for create, get, update, and delete tasks -->
-                </section>
-
-                <section id="errors">
-                    <h2>Error Handling</h2>
-                    <div class="endpoint">
-                        <h4>Validation Error (422 Unprocessable Entity)</h4>
-                        <pre><code>{
-    "message": "The given data was invalid.",
-    "errors": {
-        "field_name": [
-            "Error message"
-        ]
-    }
-}</code></pre>
-
-                        <h4>Authentication Error (401 Unauthorized)</h4>
-                        <pre><code>{
-    "message": "Unauthenticated."
-}</code></pre>
-
-                        <h4>Authorization Error (403 Forbidden)</h4>
-                        <pre><code>{
-    "message": "This action is unauthorized."
-}</code></pre>
-
-                        <h4>Not Found Error (404 Not Found)</h4>
-                        <pre><code>{
-    "message": "Resource not found."
-}</code></pre>
-                    </div>
-                </section>
-            </main>
         </div>
+
+        <!-- Add more endpoints as needed -->
+
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
-    <script>
-        hljs.highlightAll();
-    </script>
 </body>
 </html>
