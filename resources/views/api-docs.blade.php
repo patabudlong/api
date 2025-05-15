@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>API Documentation</title>
+    <title>Task API Documentation</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -202,7 +202,7 @@
 <body>
     <div class="sidebar">
         <div class="sidebar-header">
-            <h5 class="mb-3">API Documentation</h5>
+            <h5 class="mb-3">Task API Documentation</h5>
             <div class="search-box">
                 <i class="fas fa-search"></i>
                 <input type="text" placeholder="Search endpoints..." />
