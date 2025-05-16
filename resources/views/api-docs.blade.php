@@ -248,6 +248,14 @@
                 Delete Task
             </a>
         </div>
+
+        <div class="nav-section">
+            <div class="nav-section-title">System</div>
+            <a href="#health" class="nav-item">
+                <span class="method-label method-get">get</span>
+                Health Check
+            </a>
+        </div>
     </div>
 
     <div class="main-content">
@@ -338,6 +346,65 @@ Accept: application/json</code></pre>
         "updated_at": "2024-01-01T12:00:00.000000Z"
     }
 ]</code></pre>
+        </div>
+
+        <h2 id="system">System</h2>
+
+        <div id="health" class="endpoint">
+            <span class="method get">GET</span>
+            <span class="endpoint-url">/api/health</span>
+
+            <h4 class="mt-3">Health Check</h4>
+            <p>Check the health status of the API and its dependencies.</p>
+
+            <h5>Response (200 OK)</h5>
+            <pre><code>{
+    "status": "healthy",
+    "timestamp": "2024-01-01T12:00:00.000000Z",
+    "environment": "production",
+    "services": {
+        "database": {
+            "status": "healthy",
+            "message": "Database connection successful"
+        },
+        "storage": {
+            "status": "healthy",
+            "message": "Storage is accessible"
+        },
+        "cache": {
+            "status": "healthy",
+            "message": "Cache is working"
+        }
+    }
+}</code></pre>
+
+            <h5>Possible Status Codes</h5>
+            <table class="parameter-table">
+                <thead>
+                    <tr>
+                        <th>Status Code</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>200 OK</td>
+                        <td>The system is healthy and all services are working</td>
+                    </tr>
+                    <tr>
+                        <td>503 Service Unavailable</td>
+                        <td>One or more services are not working properly</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h5>Notes</h5>
+            <ul>
+                <li>This endpoint does not require authentication</li>
+                <li>It checks the connection to database, storage, and cache services</li>
+                <li>The timestamp is in UTC</li>
+                <li>The environment value matches your APP_ENV configuration</li>
+            </ul>
         </div>
 
         <!-- Add more endpoints as needed -->
